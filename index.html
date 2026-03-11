@@ -4,70 +4,218 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zet Lang | Zero Trust Language</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Zet: Güvenliği şansa bırakmayan, Rust hızında, Python sadeliğinde Zero Trust programlama dili.">
+    <script src="https://cdn.tailwindcss.com"></meta>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <script src="./main.js"></script>
 </head>
 <body class="antialiased">
 
-    <nav class="fixed w-full z-50 bg-[#050505]/90 backdrop-blur border-b border-white/5">
+    <!-- Particle Canvas -->
+    <canvas id="particles" class="fixed inset-0 z-0 pointer-events-none"></canvas>
+
+    <!-- NAV -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <div class="text-2xl font-bold font-mono tracking-tighter text-white">
-                ZET<span class="text-zet-purple">_LANG</span>
-            </div>
-            <div class="hidden md:flex gap-8 text-sm font-medium text-gray-400">
+            <a href="#" class="text-2xl font-bold font-mono tracking-tighter text-white group">
+                ZET<span class="text-zet-purple group-hover:text-purple-300 transition">_LANG</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+                <a href="#why" class="hover:text-white transition">Neden Zet?</a>
                 <a href="#manifesto" class="hover:text-white transition">Manifesto</a>
-                <a href="#details" class="hover:text-white transition">Teknik Detaylar</a>
-                <a href="#roadmap" class="hover:text-white transition text-zet-purple">Roadmap</a>
-                <a href="https://github.com/cekYc" class="border border-white/10 px-4 py-2 rounded hover:bg-white/5 transition">GitHub</a>
+                <a href="#details" class="hover:text-white transition">Teknik</a>
+                <a href="#roadmap" class="hover:text-white transition">Roadmap</a>
+                <a href="https://github.com/cekYc" target="_blank" rel="noopener noreferrer" class="border border-white/10 px-4 py-2 rounded-lg hover:bg-white/5 transition flex items-center gap-2">
+                    <i class="fa-brands fa-github"></i> GitHub
+                </a>
+                <a href="./ZetSetup.zip" download="Zet_v0.3_Setup.zip" class="bg-zet-purple hover:bg-purple-600 text-white px-5 py-2 rounded-lg transition font-semibold shadow-lg shadow-purple-500/20 flex items-center gap-2">
+                    <i class="fa-solid fa-download text-xs"></i> İndir
+                </a>
             </div>
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-btn" class="md:hidden text-white text-xl">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0a0a0c]/95 backdrop-blur-xl border-t border-white/5 px-6 py-4 space-y-3">
+            <a href="#why" class="block text-gray-300 hover:text-white py-2">Neden Zet?</a>
+            <a href="#manifesto" class="block text-gray-300 hover:text-white py-2">Manifesto</a>
+            <a href="#details" class="block text-gray-300 hover:text-white py-2">Teknik</a>
+            <a href="#roadmap" class="block text-gray-300 hover:text-white py-2">Roadmap</a>
+            <a href="./ZetSetup.zip" download="Zet_v0.3_Setup.zip" class="block bg-zet-purple text-white text-center py-3 rounded-lg font-semibold mt-2">
+                <i class="fa-solid fa-download mr-2"></i> Hemen İndir
+            </a>
         </div>
     </nav>
 
+    <!-- HERO -->
     <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative overflow-hidden pt-20">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-900/20 blur-[150px] rounded-full z-[-1]"></div>
+        <div class="hero-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full z-[-1]"></div>
+        <div class="absolute top-20 right-10 w-72 h-72 bg-indigo-600/10 blur-[120px] rounded-full z-[-1] animate-float-slow"></div>
+        <div class="absolute bottom-20 left-10 w-60 h-60 bg-purple-600/10 blur-[100px] rounded-full z-[-1] animate-float-slower"></div>
 
-        <div class="inline-block px-4 py-2 bg-purple-900/30 border border-purple-500/30 rounded-full text-purple-300 text-sm font-mono mb-8">
-            v0.3.0 "Zero Trust" Release
+        <div class="fade-in-up inline-flex items-center gap-2 px-5 py-2.5 bg-purple-900/20 border border-purple-500/20 rounded-full text-purple-300 text-sm font-mono mb-8 backdrop-blur-sm">
+            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            v0.3.0 — Stabil Sürüm Yayında
         </div>
 
-        <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-tight">
+        <h1 class="fade-in-up text-5xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-6 leading-[0.95]" style="animation-delay: 0.1s">
             GÜVENLİĞİ <br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500 glow-text">ŞANSA BIRAKMA.</span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-400 to-indigo-400 glow-text">ŞANSA BIRAKMA.</span>
         </h1>
 
-        <p class="text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto leading-relaxed mb-12 font-light">
-            Zet; performansı <span class="text-white font-semibold">Rust</span>'tan, sadeliği <span class="text-white font-semibold">Python</span>'dan alan;
-            ama güvenliği geliştiricinin insafına bırakmayan bir Zero Trust dilidir.
-            <br><br>
-            <span class="text-white border-b border-zet-purple pb-1">Zet'in amacı, hataları yakalamak değil; hataların yazılmasını derleyici seviyesinde imkânsız kılmaktır.</span>
+        <p class="fade-in-up text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-10 font-light" style="animation-delay: 0.2s">
+            Zet; <span class="text-white font-semibold">Rust</span> hızında, <span class="text-white font-semibold">Python</span> sadeliğinde — 
+            güvenliği geliştiricinin insafına değil, <span class="text-purple-300 font-medium">derleyicinin garantisine</span> bırakan bir programlama dili.
         </p>
 
-        <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
-            
-            <a href="./ZetSetup.zip" download="Zet_v0.3_Setup.zip" class="group relative px-10 py-4 bg-zet-purple hover:bg-purple-700 text-white font-bold text-lg rounded-lg transition shadow-[0_0_20px_rgba(168,85,247,0.4)] flex items-center gap-3">
-                <i class="fa-brands fa-windows text-2xl"></i>
-                <div class="text-left">
-                    <div class="text-xs font-mono text-purple-200">Windows x64</div>
-                    <div>Motoru İndir (v0.3)</div>
+        <!-- Download CTA -->
+        <div class="fade-in-up flex flex-col sm:flex-row gap-4 justify-center items-center mb-6" style="animation-delay: 0.3s">
+            <a href="./ZetSetup.zip" download="Zet_v0.3_Setup.zip" class="download-btn group relative px-10 py-5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-lg rounded-xl transition-all duration-300 shadow-[0_0_40px_rgba(168,85,247,0.3)] hover:shadow-[0_0_60px_rgba(168,85,247,0.5)] flex items-center gap-4 hover:scale-[1.02]">
+                <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center group-hover:bg-white/20 transition">
+                    <i class="fa-brands fa-windows text-2xl"></i>
                 </div>
-                <div class="absolute inset-0 rounded-lg ring-2 ring-white/20 group-hover:ring-white/40 transition"></div>
+                <div class="text-left">
+                    <div class="text-xs font-mono text-purple-200 tracking-wider">WINDOWS x64 — ÜCRETSİZ</div>
+                    <div class="text-xl">Zet v0.3'ü İndir</div>
+                </div>
+                <i class="fa-solid fa-arrow-down text-lg ml-2 group-hover:translate-y-1 transition-transform"></i>
             </a>
 
-            <a href="#details" class="px-10 py-4 bg-transparent border border-white/20 hover:bg-white/5 text-white font-bold text-lg rounded-lg transition">
-                Teknolojiyi İncele
+            <a href="#why" class="px-8 py-5 bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 text-white font-semibold text-lg rounded-xl transition-all duration-300 flex items-center gap-2">
+                Neden Zet? <i class="fa-solid fa-chevron-down text-sm text-gray-400"></i>
             </a>
         </div>
         
-        <p class="mt-6 text-xs text-gray-500 font-mono">
-            <span class="text-green-500">●</span> Stable Build | .zip (Portable) | Kurulum Gerektirmez
-        </p>
+        <div class="fade-in-up flex flex-wrap justify-center gap-6 text-xs text-gray-500 font-mono" style="animation-delay: 0.4s">
+            <span class="flex items-center gap-1.5"><span class="text-green-500">●</span> Stable Build</span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-box-open text-gray-600"></i> Portable (.zip)</span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-gray-600"></i> Kurulum Gerektirmez</span>
+            <span class="flex items-center gap-1.5"><i class="fa-brands fa-rust text-gray-600"></i> Rust Altyapısı</span>
+        </div>
 
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-gray-600">
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
     </section>
 
+    <!-- WHY ZET? — Stats Strip -->
+    <section id="why" class="relative py-20 bg-gradient-to-b from-[#050505] to-[#08080a] border-t border-b border-white/5 overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjAuNSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvc3ZnPg==')] opacity-50"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight">Neden <span class="text-zet-purple">Zet</span>?</h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">Güvenli yazılım; test yazmakla değil, hata yazmayı <strong class="text-white">imkânsız kılmakla</strong> başlar.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="stat-card text-center p-8 rounded-2xl">
+                    <div class="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-purple-300 to-purple-500 mb-2 counter" data-target="249">0</div>
+                    <div class="text-xs text-gray-500 font-mono uppercase tracking-wider mb-1">milisaniye</div>
+                    <div class="text-sm text-gray-300 font-medium">fib(40) Hızı</div>
+                </div>
+                <div class="stat-card text-center p-8 rounded-2xl">
+                    <div class="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-green-300 to-green-500 mb-2">%0</div>
+                    <div class="text-xs text-gray-500 font-mono uppercase tracking-wider mb-1">runtime</div>
+                    <div class="text-sm text-gray-300 font-medium">GC Overhead</div>
+                </div>
+                <div class="stat-card text-center p-8 rounded-2xl">
+                    <div class="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-red-300 to-red-500 mb-2 counter" data-target="118">0</div>
+                    <div class="text-xs text-gray-500 font-mono uppercase tracking-wider mb-1">fonksiyon</div>
+                    <div class="text-sm text-gray-300 font-medium">Test Kapsamı</div>
+                </div>
+                <div class="stat-card text-center p-8 rounded-2xl">
+                    <div class="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-b from-blue-300 to-blue-500 mb-2 counter" data-target="10">0</div>
+                    <div class="text-xs text-gray-500 font-mono uppercase tracking-wider mb-1">veri tipi</div>
+                    <div class="text-sm text-gray-300 font-medium">Tip Sistemi</div>
+                </div>
+            </div>
+
+            <!-- Language comparison -->
+            <div class="mt-16 max-w-4xl mx-auto">
+                <h3 class="text-center text-sm font-mono text-gray-500 uppercase tracking-widest mb-8">Diğer Dillerle Karşılaştırma</h3>
+                <div class="overflow-hidden rounded-2xl border border-white/5">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="bg-white/5 text-gray-400 border-b border-white/5">
+                                <th class="text-left px-6 py-4 font-medium">Özellik</th>
+                                <th class="px-6 py-4 font-medium text-center">Python</th>
+                                <th class="px-6 py-4 font-medium text-center">Go</th>
+                                <th class="px-6 py-4 font-medium text-center">Rust</th>
+                                <th class="px-6 py-4 font-medium text-center text-purple-300 bg-purple-500/5">Zet</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-300">
+                            <tr class="border-b border-white/5 hover:bg-white/[0.02] transition">
+                                <td class="px-6 py-4 text-white font-medium">Kolay Sözdizimi</td>
+                                <td class="px-6 py-4 text-center text-green-400"><i class="fa-solid fa-check"></i></td>
+                                <td class="px-6 py-4 text-center text-green-400"><i class="fa-solid fa-check"></i></td>
+                                <td class="px-6 py-4 text-center text-red-400"><i class="fa-solid fa-xmark"></i></td>
+                                <td class="px-6 py-4 text-center text-green-400 bg-purple-500/5"><i class="fa-solid fa-check"></i></td>
+                            </tr>
+                            <tr class="border-b border-white/5 hover:bg-white/[0.02] transition">
+                                <td class="px-6 py-4 text-white font-medium">Native Hız</td>
+                                <td class="px-6 py-4 text-center text-red-400"><i class="fa-solid fa-xmark"></i></td>
+                                <td class="px-6 py-4 text-center text-yellow-400">~</td>
+                                <td class="px-6 py-4 text-center text-green-400"><i class="fa-solid fa-check"></i></td>
+                                <td class="px-6 py-4 text-center text-green-400 bg-purple-500/5"><i class="fa-solid fa-check"></i></td>
+                            </tr>
+                            <tr class="border-b border-white/5 hover:bg-white/[0.02] transition">
+                                <td class="px-6 py-4 text-white font-medium">GC'siz Bellek</td>
+                                <td class="px-6 py-4 text-center text-red-400"><i class="fa-solid fa-xmark"></i></td>
+                                <td class="px-6 py-4 text-center text-red-400"><i class="fa-solid fa-xmark"></i></td>
+                                <td class="px-6 py-4 text-center text-green-400"><i class="fa-solid fa-check"></i></td>
+                                <td class="px-6 py-4 text-center text-green-400 bg-purple-500/5"><i class="fa-solid fa-check"></i></td>
+                            </tr>
+                            <tr class="border-b border-white/5 hover:bg-white/[0.02] transition">
+                                <td class="px-6 py-4 text-white font-medium">Taint Analysis</td>
+                                <td class="px-6 py-4 text-center text-red-400"><i class="fa-solid fa-xmark"></i></td>
+                                <td class="px-6 py-4 text-center text-red-400"><i class="fa-solid fa-xmark"></i></td>
+                                <td class="px-6 py-4 text-center text-red-400"><i class="fa-solid fa-xmark"></i></td>
+                                <td class="px-6 py-4 text-center text-green-400 bg-purple-500/5"><i class="fa-solid fa-check"></i></td>
+                            </tr>
+                            <tr class="border-b border-white/5 hover:bg-white/[0.02] transition">
+                                <td class="px-6 py-4 text-white font-medium">Determinizm Garantisi</td>
+                                <td class="px-6 py-4 text-center text-red-400"><i class="fa-solid fa-xmark"></i></td>
+                                <td class="px-6 py-4 text-center text-red-400"><i class="fa-solid fa-xmark"></i></td>
+                                <td class="px-6 py-4 text-center text-red-400"><i class="fa-solid fa-xmark"></i></td>
+                                <td class="px-6 py-4 text-center text-green-400 bg-purple-500/5"><i class="fa-solid fa-check"></i></td>
+                            </tr>
+                            <tr class="hover:bg-white/[0.02] transition">
+                                <td class="px-6 py-4 text-white font-medium">Structured Concurrency</td>
+                                <td class="px-6 py-4 text-center text-red-400"><i class="fa-solid fa-xmark"></i></td>
+                                <td class="px-6 py-4 text-center text-yellow-400">~</td>
+                                <td class="px-6 py-4 text-center text-yellow-400">~</td>
+                                <td class="px-6 py-4 text-center text-green-400 bg-purple-500/5"><i class="fa-solid fa-check"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MANIFESTO -->
     <div id="manifesto" class="border-t border-white/10 bg-[#08080a]">
+        
+        <!-- Feature pills -->
+        <div class="py-12 border-b border-white/5">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-wrap justify-center gap-3 text-sm">
+                    <span class="px-4 py-2 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-300 font-mono">i64 f64 bool char u8</span>
+                    <span class="px-4 py-2 bg-green-500/10 border border-green-500/20 rounded-full text-green-300 font-mono">validate / Untrusted</span>
+                    <span class="px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-300 font-mono">det fn / nondet fn</span>
+                    <span class="px-4 py-2 bg-red-500/10 border border-red-500/20 rounded-full text-red-300 font-mono">scope / spawn</span>
+                    <span class="px-4 py-2 bg-yellow-500/10 border border-yellow-500/20 rounded-full text-yellow-300 font-mono">for / while / break / continue</span>
+                    <span class="px-4 py-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-300 font-mono">"${interpolation}"</span>
+                    <span class="px-4 py-2 bg-pink-500/10 border border-pink-500/20 rounded-full text-pink-300 font-mono">tuple / const / array</span>
+                </div>
+            </div>
+        </div>
         
         <section class="py-32 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
             <div>
@@ -437,9 +585,68 @@
         </div>
     </section>
 
-    <footer class="py-12 bg-black text-center border-t border-white/10">
-        <p class="text-gray-500 text-sm mb-2">&copy; 2026 Zet Lang Project — Zero Trust Language.</p>
-        <p class="text-xs text-gray-600 font-mono">Developed by <span class="text-zet-purple font-bold">Ceky</span></p>
+    <!-- FINAL CTA -->
+    <section class="py-32 bg-gradient-to-b from-[#150520] to-[#050505] relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(168,85,247,0.08),transparent_70%)]"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-green-900/20 border border-green-500/20 rounded-full text-green-300 text-sm font-mono mb-8">
+                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                v0.3.0 — Kararlı Sürüm
+            </div>
+            <h2 class="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">Denemesi Bedava.</h2>
+            <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+                İndir, aç, yaz, çalıştır. Kurulum yok, bağımlılık yok, lisans derdi yok.
+                <br>Sadece <span class="text-white font-semibold">.zip</span> aç ve kodlamaya başla.
+            </p>
+            
+            <a href="./ZetSetup.zip" download="Zet_v0.3_Setup.zip" class="download-btn inline-flex items-center gap-4 px-12 py-6 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xl rounded-2xl transition-all duration-300 shadow-[0_0_60px_rgba(168,85,247,0.3)] hover:shadow-[0_0_80px_rgba(168,85,247,0.5)] hover:scale-[1.02]">
+                <i class="fa-solid fa-rocket text-2xl"></i>
+                Zet v0.3'ü İndir — Windows x64
+                <i class="fa-solid fa-arrow-down ml-2 animate-bounce"></i>
+            </a>
+
+            <div class="mt-8 flex flex-wrap justify-center gap-8 text-sm text-gray-500">
+                <span><i class="fa-solid fa-box-open mr-1"></i> ~220 KB</span>
+                <span><i class="fa-solid fa-shield-halved mr-1"></i> Portable</span>
+                <span><i class="fa-brands fa-rust mr-1"></i> Rust Altyapısı</span>
+                <span><i class="fa-solid fa-terminal mr-1"></i> CLI Derleyici</span>
+            </div>
+
+            <!-- Quick start -->
+            <div class="mt-16 max-w-lg mx-auto">
+                <h3 class="text-sm font-mono text-gray-500 uppercase tracking-widest mb-4">Hızlı Başlangıç</h3>
+                <div class="quickstart-steps space-y-3 text-left">
+                    <div class="flex items-center gap-4 bg-white/5 border border-white/5 rounded-xl px-5 py-4 text-sm">
+                        <span class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center text-purple-300 font-bold font-mono flex-shrink-0">1</span>
+                        <code class="text-gray-300 font-mono">ZetSetup.zip</code><span class="text-gray-500 ml-1">dosyasını indir ve aç</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/5 border border-white/5 rounded-xl px-5 py-4 text-sm">
+                        <span class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center text-purple-300 font-bold font-mono flex-shrink-0">2</span>
+                        <code class="text-gray-300 font-mono">kurulum.bat</code><span class="text-gray-500 ml-1">dosyasını çalıştır</span>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/5 border border-white/5 rounded-xl px-5 py-4 text-sm">
+                        <span class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center text-green-300 font-bold font-mono flex-shrink-0">3</span>
+                        <code class="text-green-300 font-mono">zet ornek.zt</code><span class="text-gray-500 ml-1">— ilk programını derle!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 bg-[#020203] text-center border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-left">
+                    <div class="text-xl font-bold font-mono text-white mb-1">ZET<span class="text-zet-purple">_LANG</span></div>
+                    <p class="text-xs text-gray-600 font-mono">Zero Trust Language — v0.3.0</p>
+                </div>
+                <div class="flex gap-6 text-gray-500 text-sm">
+                    <a href="https://github.com/cekYc/zet-lang-source" target="_blank" rel="noopener noreferrer" class="hover:text-white transition flex items-center gap-2"><i class="fa-brands fa-github"></i> Kaynak Kodu</a>
+                    <a href="https://github.com/cekYc/zet-setup" target="_blank" rel="noopener noreferrer" class="hover:text-white transition flex items-center gap-2"><i class="fa-solid fa-box"></i> Setup</a>
+                </div>
+                <p class="text-xs text-gray-600 font-mono">Developed by <span class="text-zet-purple font-bold">Ceky</span> &copy; 2026</p>
+            </div>
+        </div>
     </footer>
 
 </body>
